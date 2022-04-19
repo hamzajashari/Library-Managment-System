@@ -49,8 +49,8 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void addBook(Author author, Book book) {
-        if( authorRepository.findById(author.getId()).isPresent())
-            authorRepository.findById(author.getId()).get().getBooksList().add(book);
+        if( authorRepository.findById(author.getId().intValue()).isPresent())
+            authorRepository.findById(author.getId().intValue()).get().getBooksList().add(book);
     }
     @Override
     public Optional<Author> getAuthor(Integer authorId) {

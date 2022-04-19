@@ -14,24 +14,29 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    Integer id;
+    private Long id;
     @Column(name = "BOOK_NAME")
-    String bookName;
-    @Column(name = "BOOK_SUBNAME")
-    String bookSubname;
+    private String bookName;
     @Column(name = "BOOK_SERIAL_NAME")
-    String serialName;
+    private String serialName;
     @Column(name = "BOOKS_AUTHOR")
-    String booksAuthor;
+    private String booksAuthor;
     @Column(name = "BOOKS_PUBLISHER")
-    String booksPublisher;
+    private String booksPublisher;
     @Column(name = "DESCRIPTION")
-    String description;
+    private String description;
     @Column(name = "ISBN")
-    String isbn;
+    private String isbn;
+    @Column(name = "PAGE_NUMBER")
+    private int page;
+    @Column(name = "LANGUAGE")
+    private String language;
+    @Column(name = "PRICE")
+    private float price;
+
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "AUTHOR_ID")
-    Author author;
+    private Author author;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "publisher_id")
@@ -53,11 +58,11 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -67,14 +72,6 @@ public class Book {
 
     public void setBookName(String bookName) {
         this.bookName = bookName;
-    }
-
-    public String getBookSubname() {
-        return bookSubname;
-    }
-
-    public void setBookSubname(String bookSubname) {
-        this.bookSubname = bookSubname;
     }
 
     public String getSerialName() {
@@ -115,5 +112,29 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

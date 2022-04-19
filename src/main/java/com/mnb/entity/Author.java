@@ -16,15 +16,15 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    Integer id;
+    private Long id;
     @Column(name = "AUTHOR_NAME")
-    String authorName;
+    private String authorName;
     @Column(name = "DESCRIPTION")
-    String description;
+    private String description;
     @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "author",
             cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    List<Book> booksList=new ArrayList<>();
+    private List<Book> booksList=new ArrayList<>();
 
     public void add(Book tempBook){
         if (booksList==null){
@@ -36,11 +36,11 @@ public class Author {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
