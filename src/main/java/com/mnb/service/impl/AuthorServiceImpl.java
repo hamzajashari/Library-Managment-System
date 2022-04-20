@@ -24,7 +24,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author findById(int theId) {
+    public Author findById(long theId) {
         Optional<Author> result = authorRepository.findById(theId);
         Author theAuthor = null;
         if (result.isPresent()) {
@@ -43,17 +43,18 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void deleteById(int theId) {
+    public void deleteById(long theId) {
         authorRepository.deleteById(theId);
     }
 
     @Override
     public void addBook(Author author, Book book) {
-        if( authorRepository.findById(author.getId().intValue()).isPresent())
-            authorRepository.findById(author.getId().intValue()).get().getBooksList().add(book);
+        if( authorRepository.findById(author.getId()).isPresent())
+            authorRepository.findById(author.getId()).get().getBooksList().add(book);
     }
+
     @Override
-    public Optional<Author> getAuthor(Integer authorId) {
+    public Optional<Author> getAuthor(long authorId) {
         return authorRepository.findById(authorId);
     }
 }

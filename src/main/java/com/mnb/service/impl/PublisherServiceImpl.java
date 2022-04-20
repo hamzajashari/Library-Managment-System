@@ -26,7 +26,7 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public Publisher findById(int theId) {
+    public Publisher findById(long theId) {
        /* Optional<Publisher> result = publisherRepository.findById(theId);
 
         Publisher thePublisher = null;
@@ -53,7 +53,7 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public void deleteById(int theId) {
+    public void deleteById(long theId) {
         publisherRepository.deleteById(theId);
     }
 }

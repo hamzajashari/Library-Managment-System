@@ -9,13 +9,13 @@ import java.util.Optional;
 public interface AuthorService {
     public List<Author> findAll();
 
-    public Author findById(int theId);
+    public Author findById(long theId);
 
     public void save(Author theAuthor);
 
-    public void deleteById(int theId);
+    public void deleteById(long theId);
 
     public void addBook(Author author, Book book);
 
-    Optional<Author> getAuthor(Integer authorId);
+    Optional<Author> getAuthor(long authorId);
 }

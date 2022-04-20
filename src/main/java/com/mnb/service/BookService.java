@@ -8,11 +8,11 @@ import java.util.List;
 public interface BookService {
     List<Book> findAll();
 
-    Book findById(int theId);
+    Book findById(long theId);
 
     void save(Book theBook);
 
-    void deleteById(int theId);
+    void deleteById(long theId);
 
     List<Book> findBookByName(String keyword);
 }

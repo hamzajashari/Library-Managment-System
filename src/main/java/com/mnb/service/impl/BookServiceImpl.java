@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book findById(int theId) {
+    public Book findById(long theId) {
         return bookRepository.findById(theId)
                 .orElseThrow(() -> new NotFoundException(String.format(" not found  with ID %d", theId)));
     }
@@ -37,12 +37,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteById(int theId) {
+    public void deleteById(long theId) {
         bookRepository.deleteById(theId);
     }
 
     @Override
     public List<Book> findBookByName(String keyword) {
-        return bookRepository.findByName(keyword);
+        return bookRepository.findByBookName(keyword);
     }
 }
