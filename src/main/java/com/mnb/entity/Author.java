@@ -21,20 +21,11 @@ public class Author {
     private String authorName;
     @Column(name = "DESCRIPTION")
     private String description;
-    @OneToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.LAZY,
             mappedBy = "author",
             cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
     private List<Book> booksList=new ArrayList<>();
 
-    public void add(Book tempBook){
-        if (booksList==null){
-            booksList=new ArrayList<>();
-        }
-        // this is bi-directional relationship
-        booksList.add(tempBook);
-        tempBook.setAuthor(this);
-
-    }
 
     public Long getId() {
         return id;
