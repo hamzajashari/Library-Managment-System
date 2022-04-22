@@ -25,11 +25,15 @@
         <input type="text" th:field="*{serialName}"
                class="form-control mb-4 col-4" placeholder="Serial Name">
 
-        <input type="text" th:field="*{booksAuthor}"
-               class="form-control mb-4 col-4" placeholder="Book's Author">
+        <select th:field ="*{booksAuthor}" class="form-control mb-4 col-4" required>
+                <option value="" hidden th:placeholder="Author">Author</option>
+                <option th:each="author: ${authors}" th:value="${author.id}" th:text = "${author.authorName}"></option>
+        </select>
 
-        <input type="text" th:field="*{booksPublisher}"
-               class="form-control mb-4 col-4" placeholder="Publisher">
+        <select th:field ="*{booksPublisher}" class="form-control mb-4 col-4" required>
+            <option value="" hidden th:placeholder="Publisher">Publisher</option>
+            <option th:each="publisher: ${publishers}" th:value="${publisher.id}" th:text = "${publisher.publisherName}"></option>
+        </select>
 
         <input type="text" th:field="*{description}"
                class="form-control mb-4 col-4" placeholder="Description">

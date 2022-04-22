@@ -3,6 +3,7 @@ package com.mnb.controller;
 import com.mnb.entity.Book;
 import com.mnb.service.AuthorService;
 import com.mnb.service.BookService;
+import com.mnb.service.PublisherService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.repository.query.Param;
@@ -18,10 +19,12 @@ import java.util.List;
 public class BookController {
     final BookService bookService;
     final AuthorService authorService;
+    final PublisherService publisherService;
 
-    public BookController(BookService bookService, AuthorService authorService) {
+    public BookController(BookService bookService, AuthorService authorService, PublisherService publisherService) {
         this.bookService = bookService;
         this.authorService = authorService;
+        this.publisherService = publisherService;
     }
 
     @GetMapping("/list")
@@ -37,6 +40,8 @@ public class BookController {
         // create model attribute to bind form data
         Book theBook = new Book();
         theModel.addAttribute("books", theBook);
+        theModel.addAttribute("authors",authorService.findAll());
+        theModel.addAttribute("publishers",publisherService.findAll());
         return "book-form";
     }
 
@@ -68,11 +73,5 @@ public class BookController {
     public String findBookByName(Model model, @Param("keyword") String keyword){
         model.addAttribute("books", bookService.findBookByBookName(keyword));
         return "list-books";
-    }
-
-    @GetMapping("/searchAuthor")
-    public String findAuthorByName(Model model, @Param("keyword") String keyword){
-        model.addAttribute("authors", authorService.findAuthorByAuthorName(keyword));
-        return "book-form";
     }
 }
