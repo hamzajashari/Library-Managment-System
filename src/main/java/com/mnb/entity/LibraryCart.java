@@ -16,13 +16,15 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 public class LibraryCart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
+
     @ManyToOne
-    @Column(name = "USER")
     private User user;
+
     @ManyToMany
     @Column(name = "BOOK_LIST")
         private List<Book> bookList;

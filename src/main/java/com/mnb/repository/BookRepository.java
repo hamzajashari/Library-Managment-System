@@ -13,5 +13,5 @@ public interface BookRepository extends JpaRepository<Book,Long> {
             + "OR b.isbn LIKE %?1%"
             + "OR b.serialName LIKE %?1%"
             +"OR b.booksAuthor LIKE %?1%")
-    List<Book> findByBookName(String keyword);
+    List<Book> findBookByBookName(String keyword);
 }

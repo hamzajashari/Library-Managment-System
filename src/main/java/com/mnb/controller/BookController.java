@@ -62,7 +62,7 @@ public class BookController {
 
     @GetMapping("/search")
     public String findBookByName(Model model, @Param("keyword") String keyword){
-        model.addAttribute("books", bookService.findBookByName(keyword));
+        model.addAttribute("books", bookService.findBookByBookName(keyword));
         return "list-books";
     }
 }

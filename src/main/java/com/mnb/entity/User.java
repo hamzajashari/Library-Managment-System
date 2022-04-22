@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -30,6 +31,8 @@ public class User {
     @Column(name = "USER_DATE_OF_BIRTH")
     private LocalDateTime dateOfBirth;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<LibraryCart> carts;
 
 
     public String getName() {

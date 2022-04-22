@@ -14,5 +14,5 @@ public interface BookService {
 
     void deleteById(long theId);
 
-    List<Book> findBookByName(String keyword);
+    List<Book> findBookByBookName(String keyword);
 }
