@@ -19,7 +19,7 @@ public class Publisher {
     private Long id;
     @Column(name = "PUBLISHER_NAME")
     private String publisherName;
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION",length = 1000)
     private String description;
 
     @ManyToMany(fetch = FetchType.LAZY,

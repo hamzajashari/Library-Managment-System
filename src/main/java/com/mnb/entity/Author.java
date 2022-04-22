@@ -19,7 +19,9 @@ public class Author {
     private Long id;
     @Column(name = "AUTHOR_NAME")
     private String authorName;
-    @Column(name = "DESCRIPTION")
+    @Column(name = "AUTHOR_SURNAME")
+    private String authorSurname;
+    @Column(name = "DESCRIPTION",length = 1000)
     private String description;
     @ManyToMany(fetch = FetchType.LAZY,
             mappedBy = "author",
@@ -33,6 +35,14 @@ public class Author {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public String getAuthorSurname() {
+        return authorSurname;
+    }
+
+    public void setAuthorSurname(String authorSurname) {
+        this.authorSurname = authorSurname;
     }
 
     public String getDescription() {

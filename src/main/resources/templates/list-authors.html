@@ -27,6 +27,7 @@
         <tr>
 
             <th>Author Name</th>
+            <th>Author Surname</th>
             <th>Description</th>
             <th>Action</th>
         </tr>
@@ -35,7 +36,9 @@
         <tr th:each="tempAuthor : ${authors}">
 
             <td th:text="${tempAuthor.authorName}"/>
+            <td th:text="${tempAuthor.authorSurname}"/>
             <td th:text="${tempAuthor.description}"/>
+
             <td>
                 <div sec:authorize="hasAnyRole('USER', 'ADMIN')">
                 <!-- Add "update" button/link -->

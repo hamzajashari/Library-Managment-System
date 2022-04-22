@@ -18,4 +18,6 @@ public interface AuthorService {
     public void addBook(Author author, Book book);
 
     Optional<Author> getAuthor(long authorId);
+
+    List<Author> findAuthorByAuthorName(String name);
 }

@@ -1,6 +1,7 @@
 package com.mnb.controller;
 
 import com.mnb.entity.Book;
+import com.mnb.service.AuthorService;
 import com.mnb.service.BookService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -16,8 +17,11 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookController {
     final BookService bookService;
-    public BookController(BookService bookService) {
+    final AuthorService authorService;
+
+    public BookController(BookService bookService, AuthorService authorService) {
         this.bookService = bookService;
+        this.authorService = authorService;
     }
 
     @GetMapping("/list")
@@ -64,5 +68,11 @@ public class BookController {
     public String findBookByName(Model model, @Param("keyword") String keyword){
         model.addAttribute("books", bookService.findBookByBookName(keyword));
         return "list-books";
+    }
+
+    @GetMapping("/searchAuthor")
+    public String findAuthorByName(Model model, @Param("keyword") String keyword){
+        model.addAttribute("authors", authorService.findAuthorByAuthorName(keyword));
+        return "book-form";
     }
 }
