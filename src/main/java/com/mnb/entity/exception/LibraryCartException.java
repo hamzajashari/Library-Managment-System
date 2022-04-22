@@ -1,4 +1,4 @@
-package com.mnb.exception;
+package com.mnb.entity.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

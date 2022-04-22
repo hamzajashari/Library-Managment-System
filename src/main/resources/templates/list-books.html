@@ -37,7 +37,6 @@
             <tr>
 
                 <th>Book Name</th>
-                <th>Book Subname</th>
                 <th>Serial Name</th>
                 <th>Books Author</th>
                 <th>Books Publisher</th>
@@ -51,7 +50,6 @@
             <tr th:each="tempBook : ${books}">
 
                 <td th:text="${tempBook.bookName}"></td>
-                <td th:text="${tempBook.bookSubname}"></td>
                 <td th:text="${tempBook.serialName}"></td>
                 <td th:text="${tempBook.booksAuthor}"></td>
                 <td th:text="${tempBook.booksPublisher}"></td>

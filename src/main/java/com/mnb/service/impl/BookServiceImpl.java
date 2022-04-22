@@ -1,6 +1,6 @@
 package com.mnb.service.impl;
 
-import com.mnb.exception.NotFoundException;
+import com.mnb.entity.exception.NotFoundException;
 import com.mnb.repository.BookRepository;
 import com.mnb.entity.Book;
 import com.mnb.service.BookService;
@@ -9,7 +9,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
