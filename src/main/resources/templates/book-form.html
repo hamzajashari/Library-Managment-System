@@ -27,12 +27,12 @@
 
         <select th:field ="*{booksAuthor}" class="form-control mb-4 col-4" required>
                 <option value="" hidden th:placeholder="Author">Author</option>
-                <option th:each="author: ${authors}" th:value="${author.id}" th:text = "${author.authorName}"></option>
+                <option th:each="author: ${authors}" th:value="${author.authorName}" th:text = "${author.authorName}"></option>
         </select>
 
         <select th:field ="*{booksPublisher}" class="form-control mb-4 col-4" required>
             <option value="" hidden th:placeholder="Publisher">Publisher</option>
-            <option th:each="publisher: ${publishers}" th:value="${publisher.id}" th:text = "${publisher.publisherName}"></option>
+            <option th:each="publisher: ${publishers}" th:value="${publisher.publisherName}" th:text = "${publisher.publisherName}"></option>
         </select>
 
         <input type="text" th:field="*{description}"
