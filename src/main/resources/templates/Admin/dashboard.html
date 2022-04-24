@@ -8,23 +8,18 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
-    <title>Sidebar template</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="/static/css/dashboard.css" rel="stylesheet">
     <script src="/static/js/dashboard.js"></script>
-
 </head>
-
 <body>
 <div class="page-wrapper chiller-theme toggled">
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
     </a>
-    <nav id="sidebar" class="sidebar-wrapper">
+    <nav  id="sidebar" class="sidebar sidebar-wrapper">
         <div class="sidebar-content">
             <div class="sidebar-brand">
                 <a href="#">ADMIN</a>
@@ -67,27 +62,12 @@
                     <li class="header-menu">
                         <span>General</span>
                     </li>
-                    <li class="sidebar-dropdown">
+                    <li class="sidebar">
                         <a href="#">
                             <i class="fa fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                             <span class="badge badge-pill badge-warning">New</span>
                         </a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li>
-                                    <a href="#">Dashboard 1
-                                        <span class="badge badge-pill badge-success">Pro</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="#">Dashboard 3</a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="#">
@@ -98,12 +78,12 @@
                         <div class="sidebar-submenu">
                             <ul>
                                 <li>
-                                    <a href="#">List Books
+                                    <a href="/books/showFormForAdd">List Books
 
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">Add new book</a>
+                                    <a href="/books/save">Add new book</a>
                                 </li>
                             </ul>
                         </div>
@@ -136,22 +116,6 @@
                                 </li>
                                 <li>
                                     <a href="#">Add new publisher</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="sidebar-dropdown">
-                        <a href="#">
-                            <i class="fa fa-globe"></i>
-                            <span>Maps</span>
-                        </a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li>
-                                    <a href="#">Google maps</a>
-                                </li>
-                                <li>
-                                    <a href="#">Open street map</a>
                                 </li>
                             </ul>
                         </div>
@@ -203,7 +167,7 @@
     </nav>
     <!-- sidebar-wrapper  -->
     <main class="page-content">
-        <div class="container-fluid">
+        <div id="dashboard" class="container-fluid">
             <h2>LIBRARY MANAGMENT SYSTEM</h2>
             <hr>
             <div class="row">
@@ -226,7 +190,6 @@
                             Github</a>
                         <a href="https://azouaoui-med.github.io/react-pro-sidebar" target="_blank" class="btn btn-sm btn-success">
                             Demo</a>
-
                     </div>
 
                 </div>
@@ -284,7 +247,5 @@
         crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-
 </body>
-
 </html>

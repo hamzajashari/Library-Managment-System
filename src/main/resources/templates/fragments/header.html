@@ -13,7 +13,7 @@
 
 <body>
 
-<nav th:fragment= "header" class="navbar navbar-expand-lg navbar-dark" style="background-color: black; color: white;">
+<nav th:fragment= "header" class="navbar navbar-expand-lg navbar-dark " style="background-color: black; color: white;">
     <a class="navbar-brand">Library Management System</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -35,10 +35,14 @@
                 <a class="nav-link" href="/author/list">Authors </a>
             </li>
         </ul>
+        <form class="form-inline" style="padding-right: 50px">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </div>
     <form action="#" th:action="@{/logout}"
           method="POST">
-        <input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
+        <input type="submit" value="Logout" class="btn btn-outline-primary" />
     </form>
 </nav>
 
