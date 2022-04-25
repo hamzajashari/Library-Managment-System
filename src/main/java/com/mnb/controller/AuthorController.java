@@ -32,9 +32,9 @@ public class AuthorController {
     @GetMapping()
     public String listAuthors(Model model) {
         // get author from db
-        List<Author> theAuthors = authorService.findAll();
+        List<Author> authors = authorService.findAll();
         // add to the spring model
-        model.addAttribute("authors", theAuthors);
+        model.addAttribute("authors", authors);
         model.addAttribute("bodyContent","list-authors");
         return "master-template";
     }
@@ -49,28 +49,28 @@ public class AuthorController {
     }
 
 
-    @GetMapping("/edit/{authorId}")
-    public String showFormForUpdate(@RequestParam("authorId") int theID, Model model) {
+    @GetMapping("/edit/{id}")
+    public String showFormForUpdate(@PathVariable Long id, Model model) {
         //get the author from the service
-        Author theAuthor = authorService.findById(theID);
+        Author author = authorService.findById(id);
         //set author as a model attribute to pre-populate the form
-        model.addAttribute("authors", theAuthor);
+        model.addAttribute("authors", author);
         model.addAttribute("bodyContent","author-form");
 
         return "master-template";
     }
     @PostMapping("/save")
-    public String saveAuthor(@ModelAttribute("authors") Author theAuthor) {
+    public String saveAuthor(@ModelAttribute("authors") Author Author) {
         // save the author
-        authorService.save(theAuthor);
+        authorService.save(Author);
         // use a redirect to prevent duplicate submissions
         return "redirect:/authors";
     }
 
-    @GetMapping("/delete/{authorId}")
-    public String delete(@RequestParam("authorId") int theId) {
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
         // delete the author
-        authorService.deleteById(theId);
+        authorService.deleteById(id);
         // redirect to /author/list
         return "redirect:/authors";
     }

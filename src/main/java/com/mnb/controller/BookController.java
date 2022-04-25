@@ -48,14 +48,13 @@ public class BookController {
     }
 
 
-    @GetMapping("/edit/{bookId}")
-    public String showFormForUpdate(@RequestParam("bookId") int theID, Model model) {
+    @GetMapping("/edit/{id}")
+    public String showFormForUpdate(@PathVariable Long id, Model model) {
         //get the book from the service
-        Book theBook = bookService.findById(theID);
+        Book theBook = bookService.findById(id);
         model.addAttribute("bodyContent","book-form");
         //set book as a model attribute to pre-populate the form
         model.addAttribute("books", theBook);
-
         return "master-template";
     }
     @PostMapping("/save")
@@ -66,10 +65,10 @@ public class BookController {
         return "redirect:/books";
     }
 
-    @GetMapping("/delete/{bookId}")
-    public String delete(@RequestParam("bookId") int theId) {
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
         // delete the book
-        bookService.deleteById(theId);
+        bookService.deleteById(id);
         return "redirect:/books";
     }
 

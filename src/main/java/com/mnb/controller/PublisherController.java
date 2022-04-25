@@ -44,10 +44,10 @@ public class PublisherController {
     }
 
 
-    @GetMapping("/edit/{publisherId}")
-    public String showFormForUpdate(@RequestParam("publisherId") int theID, Model model) {
+    @GetMapping("/edit/{id}")
+    public String showFormForUpdate(@PathVariable Long id, Model model) {
         //get the publisher from the service
-        Publisher thePublisher = publisherService.findById(theID);
+        Publisher thePublisher = publisherService.findById(id);
         //set publisher as a model attribute to pre-populate the form
         model.addAttribute("publishers", thePublisher);
         model.addAttribute("bodyContent","publisher-form");
@@ -61,9 +61,9 @@ public class PublisherController {
         return "redirect:/publishers";
     }
 
-    @GetMapping("/delete/{publisherId}")
-    public String delete(@RequestParam("publisherId") int theId) {
-        publisherService.deleteById(theId);
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        publisherService.deleteById(id);
         return "redirect:/publishers";
 
     }

@@ -36,17 +36,17 @@
 
             <td th:text="${tempPublisher.publisherName}"></td>
             <td th:text="${tempPublisher.description}"></td>
-            <td>
-                <div sec:authorize="hasAnyRole('USER', 'ADMIN')">
+            <td sec:authorize="hasAnyRole('USER','ADMIN')">
+                <div>
                 <!-- Add "update" button/link -->
-                <a th:href="@{/publishers/edit/(publisherId=${tempPublisher.id})}"
+                    <a th:href="@{'/publishers/update/{id}' (id=${tempPublisher.getId()})}"
                    class="btn btn-info btn-sm">
                     Update
                 </a>
                 </div>
-                <div sec:authorize="hasRole('ADMIN')">
+                <div>
                 <!-- Add "delete" button/link -->
-                <a th:href="@{/publishers/delete/(publisherId=${tempPublisher.id})}"
+                    <a th:href="@{'/publishers/delete/{id}' (id=${tempPublisher.getId()})}"
                    class="btn btn-danger btn-sm"
                    onclick="if (!(confirm('Are you sure you want to delete this publisher?'))) return false">
                     Delete

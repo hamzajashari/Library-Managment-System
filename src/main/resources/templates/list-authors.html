@@ -38,17 +38,17 @@
             <td th:text="${tempAuthor.authorSurname}"/>
             <td th:text="${tempAuthor.description}"/>
 
-            <td sec:authorize="hasRole('ADMIN')">
-                <div sec:authorize="hasRole('ADMIN')">
+            <td sec:authorize="hasAnyRole('USER', 'ADMIN')">
+                <div >
                 <!-- Add "update" button/link -->
-                <a th:href="@{/authors/edit/${tempAuthor.id}}"
+                    <a th:href="@{'/authors/update/{id}' (id=${tempAuthor.getId()})}"
                    class="btn btn-info btn-sm">
                     Update
                 </a>
                 </div>
-                <div sec:authorize="hasRole('ADMIN')">
+                <div >
                 <!-- Add "delete" button/link -->
-                <a th:href="@{/authors/delete/${tempAuthor.id}}"
+                    <a th:href="@{'/authors/delete/{id}' (id=${tempAuthor.getId()})}"
                    class="btn btn-danger btn-sm"
                    onclick="if (!(confirm('Are you sure you want to delete this author?'))) return false">
                     Delete
