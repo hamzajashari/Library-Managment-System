@@ -30,7 +30,7 @@ public class LoginFilter implements Filter {
         if (!"/login".equals(path) &&
                 !"/h2".equals(path) &&
                 !"/register".equals(path) &&
-                !"/main.css".equals(path) && user==null) {
+                !"/login.css".equals(path) && user==null) {
             response.sendRedirect("/login");
         } else {
             filterChain.doFilter(servletRequest,servletResponse);

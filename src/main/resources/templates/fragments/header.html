@@ -37,8 +37,8 @@
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
-            <form action="#" th:action="@{/logout}"
-                  method="POST">
+            <form th:action="@{/logout}"
+                  th:method="GET">
                 <input type="submit" value="Logout" class="btn btn-outline-primary" />
             </form>
     </nav>

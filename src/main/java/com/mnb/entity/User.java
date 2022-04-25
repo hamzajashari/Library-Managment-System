@@ -3,10 +3,12 @@ package com.mnb.entity;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,20 +25,15 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "USERNAME")
+    @Column(name = "USERNAME", unique = true)
     private String username;
     @Column(name = "USER_NAME")
     private String name;
-    @Column(name = "USER_SURNAME")
-    private String surname;
-    @Column(name = "USER_EMAIL")
-    private String email;
     @Column(name = "USER_PASSWORD")
     private String password;
-    @Column(name = "USER_GENDER")
-    private String gender;
     @Column(name = "USER_DATE_OF_BIRTH")
-    private LocalDateTime dateOfBirth;
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
+    private LocalDate dateOfBirth;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
@@ -76,31 +73,12 @@ public class User implements UserDetails {
         return isEnabled;
     }
 
-
-
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
@@ -111,31 +89,23 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getGender() {
-        return gender;
-    }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
     public User() {
     }
-
-    public User(String name, String surname, String email, String password, Role role, String gender, LocalDateTime dateOfBirth) {
+    public User(String username, String password,String name,  Role role, LocalDate dateOfBirth) {
         this.name = name;
-        this.surname = surname;
-        this.email = email;
+        this.username=username;
         this.password = password;
-        this.gender = gender;
+        this.role=role;
         this.dateOfBirth = dateOfBirth;
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Controller
@@ -29,21 +30,18 @@ public class RegisterController {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-        model.addAttribute("bodyContent","register");
-        return "master-template";
+        return "register";
     }
 
     @PostMapping
-    public String register(@RequestParam String username,
+    public String register(
+                           @RequestParam String name,
+                           @RequestParam String username,
                            @RequestParam String password,
                            @RequestParam String repeatedPassword,
-                           @RequestParam String name,
-                           @RequestParam String surname,
-                           @RequestParam Role role,
-                           @RequestParam String gender,
-                           @RequestParam LocalDateTime dateOfBirth) {
-        try{
-            this.userService.register(username, password, repeatedPassword, name, surname, role,gender,dateOfBirth);
+                           @RequestParam String dateOfBirth) {
+        try {
+            this.userService.register(username, password, repeatedPassword, name,dateOfBirth);
             return "redirect:/login";
         } catch (InvalidArgumentsException | PasswordsDoNotMatchException exception) {
             return "redirect:/register?error=" + exception.getMessage();

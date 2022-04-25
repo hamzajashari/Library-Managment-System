@@ -24,29 +24,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        // add our users for in memory authentication
-        User.UserBuilder users = User.withDefaultPasswordEncoder();
-        auth.inMemoryAuthentication()
-                .withUser(users.username("user").password("user").roles("USER"))
-                .withUser(users.username("admin").password("admin").roles("USER", "ADMIN"));
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-//        http.csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/","").permitAll()
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/","").permitAll()
 //                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .anyRequest()
-//                .authenticated()
+                .anyRequest()
+                .authenticated();
 //                .and()
 //                .formLogin()
 //                .loginPage("/login").permitAll()
 //                .failureUrl("/login?error=BadCredentials")
-//                .defaultSuccessUrl("/products", true)
+//                .defaultSuccessUrl("/books", true);
 //                .and()
 //                .logout()
 //                .logoutUrl("/logout")
@@ -57,6 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .exceptionHandling().accessDeniedPage("/access_denied");
 
-    }
+   }
 
 }
