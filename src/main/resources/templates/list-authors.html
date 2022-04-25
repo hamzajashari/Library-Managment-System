@@ -29,7 +29,7 @@
             <th>Author Name</th>
             <th>Author Surname</th>
             <th>Description</th>
-            <th>Action</th>
+            <th sec:authorize="hasRole('ADMIN')">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -39,8 +39,8 @@
             <td th:text="${tempAuthor.authorSurname}"/>
             <td th:text="${tempAuthor.description}"/>
 
-            <td>
-                <div sec:authorize="hasAnyRole('USER', 'ADMIN')">
+            <td sec:authorize="hasRole('ADMIN')">
+                <div sec:authorize="hasRole('ADMIN')">
                 <!-- Add "update" button/link -->
                 <a th:href="@{/author/showFormForUpdate(authorId=${tempAuthor.id})}"
                    class="btn btn-info btn-sm">

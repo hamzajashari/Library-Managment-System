@@ -28,25 +28,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","").permitAll()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/", "/assets/**", "/register", "/api/**","/css/**","/js/**","/images/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()
-                .authenticated();
-//                .and()
-//                .formLogin()
-//                .loginPage("/login").permitAll()
-//                .failureUrl("/login?error=BadCredentials")
-//                .defaultSuccessUrl("/books", true);
-//                .and()
-//                .logout()
-//                .logoutUrl("/logout")
-//                .clearAuthentication(true)
-//                .invalidateHttpSession(true)
-//                .deleteCookies("JSESSIONID")
-//                .logoutSuccessUrl("/login")
-//                .and()
-//                .exceptionHandling().accessDeniedPage("/access_denied");
-
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .failureUrl("/login?error=BadCredentials")
+                .defaultSuccessUrl("/", true)
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/login")
+                .and()
+                .exceptionHandling().accessDeniedPage("/access_denied");
    }
 
 }
