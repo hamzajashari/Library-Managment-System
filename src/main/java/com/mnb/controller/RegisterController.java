@@ -41,11 +41,13 @@ public class RegisterController {
                            @RequestParam String surname,
                            @RequestParam Role role,
                            @RequestParam String gender,
-                           @RequestParam LocalDateTime dateOfBirth) {
+                           @RequestParam LocalDateTime dateOfBirth,Model model) {
         try{
             this.userService.register(username, password, repeatedPassword, name, surname, role,gender,dateOfBirth);
             return "redirect:/login";
         } catch (InvalidArgumentsException | PasswordsDoNotMatchException exception) {
+            model.addAttribute("hasError", true);
+            model.addAttribute("error", exception.getMessage());
             return "redirect:/register?error=" + exception.getMessage();
         }
     }
