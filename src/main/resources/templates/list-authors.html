@@ -15,11 +15,10 @@
 </head>
 
 <body>
-<div th:insert="fragments/header :: header"></div>
 <div class="container">
     <h3>AUTHORS LIST</h3>
     <hr>
-    <a th:href="@{/author/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
+    <a th:href="@{/authors/add}" class="btn btn-primary btn-sm mb-3">
         Add Author
     </a>
     <table class="table table-bordered table-striped">
@@ -42,14 +41,14 @@
             <td sec:authorize="hasRole('ADMIN')">
                 <div sec:authorize="hasRole('ADMIN')">
                 <!-- Add "update" button/link -->
-                <a th:href="@{/author/showFormForUpdate(authorId=${tempAuthor.id})}"
+                <a th:href="@{/authors/edit/${tempAuthor.id}}"
                    class="btn btn-info btn-sm">
                     Update
                 </a>
                 </div>
                 <div sec:authorize="hasRole('ADMIN')">
                 <!-- Add "delete" button/link -->
-                <a th:href="@{/author/delete(authorId=${tempAuthor.id})}"
+                <a th:href="@{/authors/delete/${tempAuthor.id}}"
                    class="btn btn-danger btn-sm"
                    onclick="if (!(confirm('Are you sure you want to delete this author?'))) return false">
                     Delete

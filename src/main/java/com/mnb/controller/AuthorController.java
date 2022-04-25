@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/author")
+@RequestMapping("/authors")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AuthorController {
 
@@ -29,45 +29,49 @@ public class AuthorController {
     }
 
 
-    @GetMapping("/list")
-    public String listAuthors(Model theModel) {
+    @GetMapping()
+    public String listAuthors(Model model) {
         // get author from db
         List<Author> theAuthors = authorService.findAll();
         // add to the spring model
-        theModel.addAttribute("authors", theAuthors);
-        return "list-authors";
+        model.addAttribute("authors", theAuthors);
+        model.addAttribute("bodyContent","list-authors");
+        return "master-template";
     }
 
-    @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model theModel) {
+    @GetMapping("/add")
+    public String showFormForAdd(Model model) {
         // create model attribute to bind form data
         Author theAuthor = new Author();
-        theModel.addAttribute("authors", theAuthor);
-        return "author-form";
+        model.addAttribute("authors", theAuthor);
+        model.addAttribute("bodyContent","author-form");
+        return "master-template";
     }
 
 
-    @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("authorId") int theID, Model theModel) {
+    @GetMapping("/edit/{authorId}")
+    public String showFormForUpdate(@RequestParam("authorId") int theID, Model model) {
         //get the author from the service
         Author theAuthor = authorService.findById(theID);
         //set author as a model attribute to pre-populate the form
-        theModel.addAttribute("authors", theAuthor);
-        return "author-form";
+        model.addAttribute("authors", theAuthor);
+        model.addAttribute("bodyContent","author-form");
+
+        return "master-template";
     }
     @PostMapping("/save")
     public String saveAuthor(@ModelAttribute("authors") Author theAuthor) {
         // save the author
         authorService.save(theAuthor);
         // use a redirect to prevent duplicate submissions
-        return "redirect:/author/list";
+        return "redirect:/authors";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/delete/{authorId}")
     public String delete(@RequestParam("authorId") int theId) {
         // delete the author
         authorService.deleteById(theId);
         // redirect to /author/list
-        return "redirect:/author/list";
+        return "redirect:/authors";
     }
 }

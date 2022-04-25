@@ -27,51 +27,56 @@ public class BookController {
         this.publisherService = publisherService;
     }
 
-    @GetMapping("/list")
-    public String listBooks(Model theModel) {
+    @GetMapping()
+    public String listBooks(Model model) {
         // get employees from db
         List<Book> theBooks = bookService.findAll();
         // add to the spring model
-        theModel.addAttribute("books", theBooks);
-        return "list-books";
+        model.addAttribute("bodyContent","list-books");
+        model.addAttribute("books", theBooks);
+        return "master-template";
     }
-    @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model theModel) {
+    @GetMapping("/add")
+    public String showFormForAdd(Model model) {
         // create model attribute to bind form data
         Book theBook = new Book();
-        theModel.addAttribute("books", theBook);
-        theModel.addAttribute("authors",authorService.findAll());
-        theModel.addAttribute("publishers",publisherService.findAll());
-        return "book-form";
+        model.addAttribute("bodyContent","book-form");
+        model.addAttribute("books", theBook);
+        model.addAttribute("authors",authorService.findAll());
+        model.addAttribute("publishers",publisherService.findAll());
+        return "master-template";
     }
 
 
-    @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("bookId") int theID, Model theModel) {
+    @GetMapping("/edit/{bookId}")
+    public String showFormForUpdate(@RequestParam("bookId") int theID, Model model) {
         //get the book from the service
         Book theBook = bookService.findById(theID);
+        model.addAttribute("bodyContent","book-form");
         //set book as a model attribute to pre-populate the form
-        theModel.addAttribute("books", theBook);
-        return "book-form";
+        model.addAttribute("books", theBook);
+
+        return "master-template";
     }
     @PostMapping("/save")
     public String saveBook(@ModelAttribute("books") Book theBook) {
         // save the book
         bookService.save(theBook);
         // use a redirect to prevent duplicate submissions
-        return "redirect:/books/list";
+        return "redirect:/books";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/delete/{bookId}")
     public String delete(@RequestParam("bookId") int theId) {
         // delete the book
         bookService.deleteById(theId);
-        return "redirect:/books/list";
+        return "redirect:/books";
     }
 
     @GetMapping("/search")
     public String findBookByName(Model model, @Param("keyword") String keyword){
+        model.addAttribute("bodyContent","list-books");
         model.addAttribute("books", bookService.findBookByBookName(keyword));
-        return "list-books";
+        return "master-template";
     }
 }

@@ -13,7 +13,6 @@
 </head>
 
 <body>
-<div th:insert="fragments/header :: header"></div>
 <div class="container">
 
     <h3>Publisher Directory</h3>
@@ -21,7 +20,7 @@
 
     <p class="h4 mb-4">Save Publisher</p>
 
-    <form action="#" th:action="@{/publisher/save}"
+    <form action="#" th:action="@{/publishers/save}"
           th:object="${publishers}" method="POST">
 
         <!-- Add hidden form field to handle update -->

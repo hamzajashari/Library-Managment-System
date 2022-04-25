@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/publisher")
+@RequestMapping("/publishers")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PublisherController {
     final PublisherService publisherService;
@@ -21,55 +21,50 @@ public class PublisherController {
     }
 
 
-    @GetMapping("/list")
-    public String listPublishers(Model theModel) {
+    @GetMapping()
+    public String listPublishers(Model model) {
 
         // get publisher from db
         List<Publisher> thePublishers = publisherService.findAll();
-
+        model.addAttribute("bodyContent","list-publishers");
         // add to the spring model
-        theModel.addAttribute("publishers", thePublishers);
+        model.addAttribute("publishers", thePublishers);
 
-        return "list-publishers";
+        return "master-template";
     }
-    @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model theModel) {
+    @GetMapping("/add")
+    public String showFormForAdd(Model model) {
 
         // create model attribute to bind form data
         Publisher thePublisher = new Publisher();
+        model.addAttribute("bodyContent","publisher-form");
+        model.addAttribute("publishers", thePublisher);
 
-        theModel.addAttribute("publishers", thePublisher);
-
-        return "publisher-form";
+        return "master-template";
     }
 
 
-    @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("publisherId") int theID, Model theModel) {
+    @GetMapping("/edit/{publisherId}")
+    public String showFormForUpdate(@RequestParam("publisherId") int theID, Model model) {
         //get the publisher from the service
         Publisher thePublisher = publisherService.findById(theID);
         //set publisher as a model attribute to pre-populate the form
-        theModel.addAttribute("publishers", thePublisher);
-        return "publisher-form";
+        model.addAttribute("publishers", thePublisher);
+        model.addAttribute("bodyContent","publisher-form");
+        return "master-template";
     }
     @PostMapping("/save")
     public String savePublisher(@ModelAttribute("publishers") Publisher thePublisher) {
-
         // save the publisher
         publisherService.save(thePublisher);
-
         // use a redirect to prevent duplicate submissions
-        return "redirect:/publisher/list";
+        return "redirect:/publishers";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/delete/{publisherId}")
     public String delete(@RequestParam("publisherId") int theId) {
-
-        // delete the book
         publisherService.deleteById(theId);
-
-        // redirect to /publisher/list
-        return "redirect:/publisher/list";
+        return "redirect:/publishers";
 
     }
 }

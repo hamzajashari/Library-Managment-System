@@ -13,12 +13,11 @@
 </head>
 
 <body>
-<div th:insert="fragments/header :: header"></div>
 <div class="container">
     <h3>Author Directory</h3>
     <hr>
     <p class="h4 mb-4">Save Author</p>
-    <form action="#" th:action="@{/author/save}"
+    <form action="#" th:action="@{/authors/save}"
           th:object="${authors}" method="POST">
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
