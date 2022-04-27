@@ -54,7 +54,7 @@
                 <td th:text="${tempBook.booksPublisher}"></td>
                 <td th:text="${tempBook.description}"></td>
                 <td th:text="${tempBook.isbn}"></td>
-                <td sec:authorize="hasAnyRole('USER', 'ADMIN')">
+                <td sec:authorize="hasRole('ADMIN')">
                     <div>
                         <!-- Add "update" button/link -->
                         <a th:href="@{'/books/edit/{id}' (id=${tempBook.getId()})}"
