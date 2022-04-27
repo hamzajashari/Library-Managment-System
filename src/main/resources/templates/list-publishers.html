@@ -39,7 +39,7 @@
             <td sec:authorize="hasAnyRole('USER','ADMIN')">
                 <div>
                 <!-- Add "update" button/link -->
-                    <a th:href="@{'/publishers/update/{id}' (id=${tempPublisher.getId()})}"
+                    <a th:href="@{'/publishers/edit/{id}' (id=${tempPublisher.getId()})}"
                    class="btn btn-info btn-sm">
                     Update
                 </a>

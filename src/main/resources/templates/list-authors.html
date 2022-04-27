@@ -28,7 +28,7 @@
             <th>Author Name</th>
             <th>Author Surname</th>
             <th>Description</th>
-            <th sec:authorize="hasRole('ADMIN')">Action</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -41,7 +41,7 @@
             <td sec:authorize="hasAnyRole('USER', 'ADMIN')">
                 <div >
                 <!-- Add "update" button/link -->
-                    <a th:href="@{'/authors/update/{id}' (id=${tempAuthor.getId()})}"
+                    <a th:href="@{'/authors/edit/{id}' (id=${tempAuthor.getId()})}"
                    class="btn btn-info btn-sm">
                     Update
                 </a>
