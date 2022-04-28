@@ -25,12 +25,53 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.authenticationProvider = authenticationProvider;
     }
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        //Web resources
+        web.ignoring().antMatchers("/resources/**");
+        web.ignoring().antMatchers("resources/**");
+
+        web.ignoring().antMatchers("/css/**");
+        web.ignoring().antMatchers("/scripts/**");
+        web.ignoring().antMatchers("/js/**");
+        web.ignoring().antMatchers("/fonts/**");
+        web.ignoring().antMatchers("/scss/**");
+
+        web.ignoring().antMatchers("/img/**");
+        web.ignoring().antMatchers("img/**");
+        web.ignoring().antMatchers("css/**");
+        web.ignoring().antMatchers("js/**");
+        web.ignoring().antMatchers("js/vendor/**");
+        web.ignoring().antMatchers("/js/vendor/**");
+        web.ignoring().antMatchers("/doc/**");
+
+        web.ignoring().antMatchers("fonts/**");
+        web.ignoring().antMatchers("scss/**");
+        web.ignoring().antMatchers("scss/bootstrap/**");
+        web.ignoring().antMatchers("scss/bootstrap/mixins/**");
+        web.ignoring().antMatchers("scss/bootstrap/utilities/**");
+        web.ignoring().antMatchers("scss/theme/**");
+
+        web.ignoring().antMatchers("doc/**");
+        web.ignoring().antMatchers("doc/css/**");
+        web.ignoring().antMatchers("/doc/css/**");
+        web.ignoring().antMatchers("doc/fonts/**");
+        web.ignoring().antMatchers("doc/img/**");
+        web.ignoring().antMatchers("/doc/img/**");
+        web.ignoring().antMatchers("doc/js/**");
+        web.ignoring().antMatchers("doc/syntax-highlighter/**");
+
+        web.ignoring().antMatchers("scripts/**");
+        web.ignoring().antMatchers("/scripts/**");
+
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/home", "/resources", "/static" ,"/assets", "/register", "/api","/css"
-                        ,"/js","/images","/plugins","/scss").permitAll()
+                .antMatchers("/","/home","/login", "/register", "/api/**","/css/**"
+                        ,"/js/**","/images/**","/plugins/**","/scss/**","/static/**").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
