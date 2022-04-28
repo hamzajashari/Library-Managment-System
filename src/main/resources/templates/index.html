@@ -14,52 +14,30 @@
 <body>
 <sec:authentication property="principal.username" var="user"/>
 <sec:authentication property="principal.authorities" var="authorities"/>
-
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <h1>WELCOME TO LIBRARY MANAGEMENT SYSTEM</h1>
+<div class="card-deck d-flex justify-content-center">
+    <div class="card">
+        <img class="card-img-top"  th:src="@{/images/books.jpg}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Books</h5>
+            <p class="card-text">In this section you can find all books</p>
+            <a type="button" class="btn btn-success" th:href="@{/books}">View books</a>
         </div>
     </div>
-</div>
-<div class="container">
-    <div class="album py-5 bg-light">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img th:src="@{/images/books.jpg}">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a th:href="@{/books}" class="btn btn-primary">BOOKS </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img th:src="@{/images/authors.jpg}">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a th:href="@{/authors}" class="btn btn-primary">AUTHORS </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img th:src="@{/images/publishers.jpeg}">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                    <a th:href="@{/publishers}" class="btn btn-primary">PUBLISHERS </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <img class="card-img-top" th:src="@{/images/authors.jpg}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Authors</h5>
+            <p class="card-text">In this section you can find all authors</p>
+            <a type="button" class="btn btn-success" th:href="@{/authors}">View authors</a>
+        </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" th:src="@{/images/publishers.jpeg}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Publishers</h5>
+            <p class="card-text">In this section you can find all publishers</p>
+            <a type="button" class="btn btn-success" th:href="@{/publishers}">View publishers</a>
+        </div>
     </div>
 </div>
 </body>

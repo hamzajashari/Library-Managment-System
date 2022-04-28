@@ -14,7 +14,7 @@
 <div class="container">
     <h3>BOOKS LIST</h3>
     <hr>
-    <a th:href="@{/books/add}" class="btn btn-primary btn-sm mb-3">
+    <a th:href="@{/books/add}" class="btn btn-primary btn-sm mb-3" sec:authorize="hasRole('ADMIN')">
         Add Book
     </a>
     <form th:action="@{/books/search}">
@@ -40,8 +40,8 @@
                 <th>Books Author</th>
                 <th>Books Publisher</th>
                 <th>Books description</th>
-                <th>ISBN</th>
-                <th>Action</th>
+                <th sec:authorize="isAuthenticated()">ISBN</th>
+                <th sec:authorize="hasRole('ADMIN')">Action</th>
             </tr>
             </thead>
 
@@ -53,7 +53,7 @@
                 <td th:text="${tempBook.booksAuthor}"></td>
                 <td th:text="${tempBook.booksPublisher}"></td>
                 <td th:text="${tempBook.description}"></td>
-                <td th:text="${tempBook.isbn}"></td>
+                <td th:text="${tempBook.isbn}" sec:authorize="isAuthenticated()"></td>
                 <td sec:authorize="hasRole('ADMIN')">
                     <div>
                         <!-- Add "update" button/link -->

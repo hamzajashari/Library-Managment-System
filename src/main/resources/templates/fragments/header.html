@@ -1,4 +1,6 @@
-<section xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<section>
+
+<header xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -25,40 +27,45 @@
                                 </a>
                                 <!-- Dropdown list -->
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" th:href="@{/about-us}">About Us</a>
-                                    <a class="dropdown-item" th:href="@{/contact-us}">Contact Us</a>
-                                    <a class="dropdown-item" th:href="@{/user-profile}">User Profile</a>
-                                    <a class="dropdown-item" th:href="@{/404}">404 Page</a>
-                                    <a class="dropdown-item" th:href="@{/package}">Package</a>
-                                    <a class="dropdown-item" th:href="@{/single}">Single Page</a>
-                                    <a class="dropdown-item" th:href="@{/store}">Store Single</a>
-                                    <a class="dropdown-item" th:href="@{/single-blog}">Single Post</a>
-                                    <a class="dropdown-item" th:href="@{/blog}">Blog</a>
+                                    <a class="dropdown-item" th:href="@{/books}">Book</a>
+                                    <a class="dropdown-item" th:href="@{/authors}">Author</a>
+                                    <a class="dropdown-item" th:href="@{/publishers}">Publisher</a>
+                                    <a class="dropdown-item" th:href="@{/user-profile}" sec:authorize="hasRole('USER')">User Profile</a>
+                                    <a class="dropdown-item" th:href="@{/contact-us}" sec:authorize="hasRole('USER')">Contact Us</a>
+                                    <a class="dropdown-item" th:href="@{/about-us}" sec:authorize="hasRole('USER')">About Us</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
 
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown dropdown-slide">
-                                <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Listing <span><i class="fa fa-angle-down"></i></span>
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link" href="#">
+                                    <th:block th:if="${#request.getRemoteUser() != null}"
+                                              th:text="${#request.getRemoteUser()}"></th:block>
                                 </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" th:href="@{/category}">Ad-Gird View</a>
-                                    <a class="dropdown-item" th:href="@{/ad-listing-list}">Ad-List View</a>
-                                </div>
+                            </li>
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="btn btn-success btn-sm ml-3" href="/shopping-cart" sec:authorize="hasRole('USER')">
+                                    <i class="fa fa-shopping-cart"></i> Cart
+                                </a>
+                            </li>
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="btn btn-light btn-sm ml-3" href="/logout">
+                                    <i class="fa fa-sign-out"></i> Logout
+                                </a>
+                            </li>
+                            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                                <a class="btn btn-light btn-sm ml-3" href="/login">
+                                    <i class="fa fa-shopping-cart"></i> Login
+                                </a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav ml-auto mt-10">
-                            <li class="nav-item">
-                                <a class="nav-link login-button" th:href="@{/login}">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white add-button" th:href="@{/ad-listing}"><i class="fa fa-plus-circle"></i> Add Listing</a>
-                            </li>
-                        </ul>
+
                     </div>
                 </nav>
             </div>
         </div>
     </div>
+</header>
 </section>
 

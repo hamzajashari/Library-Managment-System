@@ -18,7 +18,7 @@
 <div class="container">
     <h3>AUTHORS LIST</h3>
     <hr>
-    <a th:href="@{/authors/add}" class="btn btn-primary btn-sm mb-3">
+    <a th:href="@{/authors/add}" class="btn btn-primary btn-sm mb-3" sec:authorize="hasRole('ADMIN')">
         Add Author
     </a>
     <table class="table table-bordered table-striped">
@@ -28,7 +28,7 @@
             <th>Author Name</th>
             <th>Author Surname</th>
             <th>Description</th>
-            <th>Action</th>
+            <th sec:authorize="hasRole('ADMIN')">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -38,7 +38,7 @@
             <td th:text="${tempAuthor.authorSurname}"/>
             <td th:text="${tempAuthor.description}"/>
 
-            <td sec:authorize="hasAnyRole('USER', 'ADMIN')">
+            <td sec:authorize="hasRole('ADMIN')">
                 <div >
                 <!-- Add "update" button/link -->
                     <a th:href="@{'/authors/edit/{id}' (id=${tempAuthor.getId()})}"

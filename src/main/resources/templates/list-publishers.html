@@ -19,7 +19,7 @@
 
     <h3>PUBLISHERS LIST</h3>
     <hr>
-    <a th:href="@{/publishers/add}" class="btn btn-primary btn-sm mb-3">
+    <a th:href="@{/publishers/add}" class="btn btn-primary btn-sm mb-3" sec:authorize="hasRole('ADMIN')">
         Add Publisher
     </a>
     <table class="table table-bordered table-striped">
@@ -28,7 +28,7 @@
 
             <th>Publisher Name</th>
             <th>Description</th>
-            <th>Action</th>
+            <th sec:authorize="hasRole('ADMIN')">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@
 
             <td th:text="${tempPublisher.publisherName}"></td>
             <td th:text="${tempPublisher.description}"></td>
-            <td sec:authorize="hasAnyRole('USER','ADMIN')">
+            <td sec:authorize="hasRole('ADMIN')">
                 <div>
                 <!-- Add "update" button/link -->
                     <a th:href="@{'/publishers/edit/{id}' (id=${tempPublisher.getId()})}"
