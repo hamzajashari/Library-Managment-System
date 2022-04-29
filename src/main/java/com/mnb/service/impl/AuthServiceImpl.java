@@ -1,28 +1,49 @@
 package com.mnb.service.impl;
 
+import com.mnb.entity.Book;
+import com.mnb.entity.Role;
 import com.mnb.entity.User;
 import com.mnb.entity.exception.InvalidArgumentsException;
+import com.mnb.entity.exception.InvalidUpdateException;
 import com.mnb.entity.exception.InvalidUserCredentialsException;
 import com.mnb.repository.UserRepository;
 import com.mnb.service.AuthService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
-
-    public AuthServiceImpl(UserRepository userRepository) {
+    private final PasswordEncoder passwordEncoder;
+    public AuthServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+    @Override
+    public void update(String name,String oldUsername, String username, String password,String updatePassword,String dateOfBirth) throws InvalidUpdateException {
+        User user=null;
+        if (username==null || username.isEmpty() || password==null || password.isEmpty() ||
+                name==null || name.isEmpty() || dateOfBirth==null || dateOfBirth.equals("")) {
+            throw new InvalidArgumentsException();
+        }
+        if(this.userRepository.findByUsername(oldUsername).isPresent()){
+            user= this.userRepository.findByUsernameAndPassword(oldUsername,password).orElseThrow(()-> new UsernameNotFoundException(username));
+            user.setName(name);
+            user.setUsername(username);
+            user.setPassword(passwordEncoder.encode(updatePassword));
+            user.setDateOfBirth(LocalDate.parse(dateOfBirth));
+            user.setId(this.userRepository.findByUsername(username).get().getId());
+            this.userRepository.save(user);
+        }
     }
 
     @Override
-    public User login(String username, String password) {
-        if (username==null || username.isEmpty() || password==null || password.isEmpty()) {
-            throw new InvalidArgumentsException();
-        }
-        return userRepository.findByUsernameAndPassword(username,
-                password).orElseThrow(InvalidUserCredentialsException::new);
+    public void save(User user) {
+        this.userRepository.save(user);
     }
 
 }

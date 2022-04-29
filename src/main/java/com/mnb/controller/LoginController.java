@@ -27,21 +27,6 @@ public class LoginController {
         model.addAttribute("bodyContent","login");
         return "master-template";
     }
-    @PostMapping
-    public String Login(HttpServletRequest request, Model model){
-            User user = null;
-            try{
-                user = this.authService.login(request.getParameter("username"),request.getParameter("password"));
-                request.getSession().setAttribute("user",user);
-                return "list-books";
-            }
-            catch (InvalidUserCredentialsException exception){
-                model.addAttribute("hasError", true);
-                model.addAttribute("error", exception.getMessage());
-                return "login";
-
-            }
-    }
     @PostMapping("/access-denied")
     public String showAccessDenied() {
         return "access-denied";

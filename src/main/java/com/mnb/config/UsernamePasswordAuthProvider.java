@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Component
 public class UsernamePasswordAuthProvider implements AuthenticationProvider {
 
@@ -29,7 +31,6 @@ public class UsernamePasswordAuthProvider implements AuthenticationProvider {
         if ("".equals(username) || "".equals(password)) {
             throw new BadCredentialsException("Invalid Credentials");
         }
-
         UserDetails userDetails = this.userService.loadUserByUsername(username);
 
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {

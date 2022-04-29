@@ -43,4 +43,6 @@ public class UserServiceImpl implements UserService {
         User user = new User(username,passwordEncoder.encode(password),name,Role.ROLE_USER,LocalDate.parse(dateOfBirth));
         return userRepository.save(user);
     }
+
+
 }
