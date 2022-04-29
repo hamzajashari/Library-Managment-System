@@ -31,12 +31,13 @@ public class AuthServiceImpl implements AuthService {
             throw new InvalidArgumentsException();
         }
         if(this.userRepository.findByUsername(oldUsername).isPresent()){
-            user= this.userRepository.findByUsernameAndPassword(oldUsername,password).orElseThrow(()-> new UsernameNotFoundException(username));
+           //user= this.userRepository.findByUsernameAndPassword(oldUsername,password).orElseThrow(()-> new UsernameNotFoundException(username));
+            user = this.userRepository.findByUsername(oldUsername).orElseThrow(()-> new UsernameNotFoundException(oldUsername));
             user.setName(name);
             user.setUsername(username);
             user.setPassword(passwordEncoder.encode(updatePassword));
             user.setDateOfBirth(LocalDate.parse(dateOfBirth));
-            user.setId(this.userRepository.findByUsername(username).get().getId());
+            //user.setId(this.userRepository.findByUsername(o).get().getId());
             this.userRepository.save(user);
         }
     }

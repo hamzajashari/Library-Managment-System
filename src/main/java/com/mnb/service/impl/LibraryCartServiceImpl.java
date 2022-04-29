@@ -14,6 +14,7 @@ import com.mnb.repository.LibraryCartRepository;
 import com.mnb.repository.UserRepository;
 import com.mnb.service.BookService;
 import com.mnb.service.LibraryCartService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +27,8 @@ public class LibraryCartServiceImpl implements LibraryCartService {
     private final UserRepository userRepository;
     private final BookService bookService;
 
-    public LibraryCartServiceImpl(LibraryCartRepository libraryCartRepository, UserRepository userRepository,
+    public LibraryCartServiceImpl(LibraryCartRepository libraryCartRepository,
+                                  UserRepository userRepository,
                                   BookService bookService) {
         this.libraryCartRepository = libraryCartRepository;
         this.userRepository = userRepository;
@@ -42,15 +44,17 @@ public class LibraryCartServiceImpl implements LibraryCartService {
 
     @Override
     public LibraryCart getActiveLibraryCart(String username) {
-        User user = this.userRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException(username));
 
         return this.libraryCartRepository
-                .findByUserAndStatus(user, LibraryCartStatus.CREATED)
+                .findByUserAndStatus(userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username)),
+                        LibraryCartStatus.CREATED)
                 .orElseGet(() -> {
-                    LibraryCart cart = new LibraryCart(user);
-                    return this.libraryCartRepository.save(cart);
+                    User user = this.userRepository.findByUsername(username)
+                            .orElseThrow(() -> new UserNotFoundException(username));
+                    LibraryCart librarycart = new LibraryCart(user);
+                    return this.libraryCartRepository.save(librarycart);
                 });
+
 
     }
 
