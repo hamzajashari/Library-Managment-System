@@ -59,7 +59,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<Author> findAuthorByAuthorName(String name) {
+    public List<Author> findByAuthorName(String name) {
         return authorRepository.findAuthorByAuthorName(name);
     }
 

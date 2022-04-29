@@ -21,6 +21,19 @@
     <a th:href="@{/authors/add}" class="btn btn-primary btn-sm mb-3" sec:authorize="hasRole('ADMIN')">
         Add Author
     </a>
+    <form th:action="@{/authors/search}">
+        <div class="form-row align-items-center">
+            <div class="col">
+                <input type="text" name="keyword" class="form-control mb-10" id="inlineFormInput"
+                       placeholder="Authors name" required>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-success">Search</button>
+                <a th:href="@{/authors}" class="btn btn-warning"> Clear</a>
+            </div>
+        </div>
+    </form>
+    <hr>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>

@@ -34,7 +34,11 @@ public class LoginFilter implements Filter {
                 user==null &&
                 !"/books".equals(path) &&
                 !"/publishers".equals(path) &&
-                !"/authors".equals(path)) {
+                !"/authors".equals(path) &&
+                !"/books/search".equals(path) &&
+                !"/authors/search".equals(path) &&
+                !"/publishers/search".equals(path)
+        ) {
             response.sendRedirect("/login");
         } else {
             filterChain.doFilter(servletRequest,servletResponse);

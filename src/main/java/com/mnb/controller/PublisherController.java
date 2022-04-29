@@ -4,6 +4,7 @@ import com.mnb.entity.Publisher;
 import com.mnb.service.PublisherService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -66,5 +67,12 @@ public class PublisherController {
         publisherService.deleteById(id);
         return "redirect:/publishers";
 
+    }
+
+    @GetMapping("/search")
+    public String findPublisherByName(Model model, @Param("keyword") String keyword){
+        model.addAttribute("bodyContent","list-publishers");
+        model.addAttribute("publishers", publisherService.findByPublisherName(keyword));
+        return "master-template";
     }
 }

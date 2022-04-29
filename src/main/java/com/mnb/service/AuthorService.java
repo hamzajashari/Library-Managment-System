@@ -19,5 +19,5 @@ public interface AuthorService {
 
     Optional<Author> getAuthor(long authorId);
 
-    List<Author> findAuthorByAuthorName(String name);
+    List<Author> findByAuthorName(String name);
 }

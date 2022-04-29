@@ -43,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("js/vendor/**");
         web.ignoring().antMatchers("/js/vendor/**");
         web.ignoring().antMatchers("/doc/**");
+        web.ignoring().antMatchers("/less/**");
+        web.ignoring().antMatchers("less/**");
 
         web.ignoring().antMatchers("fonts/**");
         web.ignoring().antMatchers("scss/**");
@@ -71,8 +73,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/","/home","/login", "/register", "/api/**","/css/**"
-                        ,"/js/**","/images/**","/plugins/**","/scss/**","/static/**","/books","/authors","/publishers,",
-                                "/about-us").permitAll()
+                        ,"/js/**","/images/**","/plugins/**","/scss/**","/static/**","/less/**","/books","/authors","/publishers",
+                                "/about-us","/books/search","/authors/search","/publishers/search").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()

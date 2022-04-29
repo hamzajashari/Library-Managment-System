@@ -8,6 +8,8 @@ import java.util.List;
 public interface PublisherService {
     public List<Publisher> findAll();
 
+    public List<Publisher> findByPublisherName(String keyword);
+
     public Publisher findById(long theId);
 
     public void save(Publisher thePublisher);

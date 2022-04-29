@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -73,5 +74,11 @@ public class AuthorController {
         authorService.deleteById(id);
         // redirect to /author/list
         return "redirect:/authors";
+    }
+    @GetMapping("/search")
+    public String findBookByName(Model model, @Param("keyword") String keyword){
+        model.addAttribute("bodyContent","list-authors");
+        model.addAttribute("authors", authorService.findByAuthorName(keyword));
+        return "master-template";
     }
 }
