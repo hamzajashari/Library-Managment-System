@@ -15,6 +15,7 @@
         <thead class="thead-dark">
         <tr>
           <th>Book Name</th>
+          <th>Book Image</th>
           <th>Author</th>
           <th>Publisher</th>
           <th>Language</th>
@@ -26,6 +27,7 @@
         <tbody>
         <tr th:each="book : ${books}">
           <td th:text="${book.bookName}"></td>
+          <td><img th:src="${book.foto}" height="120px" width="100px"></td>
           <td th:text="${book.booksAuthor}"></td>
           <td th:text="${book.booksPublisher}"></td>
           <td th:text="${book.language}"></td>

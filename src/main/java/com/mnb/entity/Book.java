@@ -34,6 +34,8 @@ public class Book {
     private String language;
     @Column(name = "PRICE")
     private float price;
+    @Column(name="foto")
+    private String foto;
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private List<Author> author;
@@ -45,6 +47,14 @@ public class Book {
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "review_id")
     private List<Review> review;
+
+    public String getBookimg() {
+        return foto;
+    }
+
+    public void setBookimg(String foto) {
+        this.foto = foto;
+    }
 
     public List<Author> getAuthor() {
         return author;

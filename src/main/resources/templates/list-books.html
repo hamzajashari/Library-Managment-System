@@ -32,7 +32,9 @@
             <thead class="thead-dark">
             <tr>
                 <th sec:authorize="isAuthenticated()">ISBN</th>
+
                 <th>Book Name</th>
+                <th>Book Image</th>
                 <th>Books Author</th>
                 <th>Books Publisher</th>
                 <th>Books description</th>
@@ -46,7 +48,10 @@
             <tbody>
             <tr th:each="tempBook : ${books}">
                 <td th:text="${tempBook.isbn}" sec:authorize="isAuthenticated()"></td>
+
                 <td th:text="${tempBook.bookName}"></td>
+                <td><img th:src="${tempBook.foto}" height="150px" width="100px"></td>
+<!--                <td th:text="${tempBook.foto}"></td>-->
                 <td th:text="${tempBook.booksAuthor}"></td>
                 <td th:text="${tempBook.booksPublisher}"></td>
                 <td th:text="${tempBook.description}"></td>
