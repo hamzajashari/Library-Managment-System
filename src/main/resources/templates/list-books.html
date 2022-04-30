@@ -38,6 +38,9 @@
                 <th>Books Publisher</th>
                 <th>Books description</th>
                 <th sec:authorize="isAuthenticated()">ISBN</th>
+                <th>Books language</th>
+                <th>Books page</th>
+                <th>Books price</th>
                 <th sec:authorize="hasAnyRole('USER','ADMIN')">Action</th>
             </tr>
             </thead>
@@ -51,6 +54,9 @@
                 <td th:text="${tempBook.booksPublisher}"></td>
                 <td th:text="${tempBook.description}"></td>
                 <td th:text="${tempBook.isbn}" sec:authorize="isAuthenticated()"></td>
+                <td th:text="${tempBook.language}"></td>
+                <td th:text="${tempBook.page}"></td>
+                <td th:text="${tempBook.price}"></td>
                 <td >
                     <th:block sec:authorize="hasRole('ADMIN')" >
                         <div>
