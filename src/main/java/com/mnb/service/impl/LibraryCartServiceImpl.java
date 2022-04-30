@@ -37,9 +37,10 @@ public class LibraryCartServiceImpl implements LibraryCartService {
 
     @Override
     public List<Book> listAllBooksInLibraryCart(Long cartId) {
-        if(!this.libraryCartRepository.findById(cartId).isPresent())
-            throw new LibraryCartNotFoundException(cartId);
-        return this.libraryCartRepository.findById(cartId).get().getBookList();
+        if(this.libraryCartRepository.findById(cartId).isPresent())
+            return this.libraryCartRepository.findById(cartId).get().getBookList();
+        else
+        throw new LibraryCartNotFoundException(cartId);
     }
 
     @Override

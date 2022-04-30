@@ -1,6 +1,7 @@
 package com.mnb.controller;
 
 
+import com.mnb.entity.Book;
 import com.mnb.entity.LibraryCart;
 import com.mnb.entity.User;
 import com.mnb.service.LibraryCartService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 //import java.security.Principal;
 import java.security.Principal;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -32,8 +34,11 @@ public class LibraryCartController {
         }
         String username = req.getRemoteUser();
         LibraryCart libraryCart = this.libraryCartService.getActiveLibraryCart(username);
-        model.addAttribute("books", this.libraryCartService.listAllBooksInLibraryCart(libraryCart.getId()));
+        List<Book> bookList = this.libraryCartService.listAllBooksInLibraryCart(libraryCart.getId());
+        model.addAttribute("librarycart", libraryCart);
+        model.addAttribute("books", bookList);
         model.addAttribute("bodyContent", "library-cart");
+        model.addAttribute("datecreated",libraryCart.getDateCreated().toLocalDate());
         return "master-template";
     }
     @PostMapping("/add-book/{id}")

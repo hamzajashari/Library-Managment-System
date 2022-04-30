@@ -37,13 +37,13 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item" sec:authorize="isAuthenticated()">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link mt-2" th:href="@{/user-profile}">
                                     <th:block th:if="${#request.getRemoteUser() != null}"
                                               th:text="${#request.getRemoteUser()}"></th:block>
                                 </a>
                             </li>
                             <li class="nav-item" sec:authorize="isAuthenticated()">
-                                <a class="btn btn-success btn-sm ml-3" href="/shopping-cart" sec:authorize="hasRole('USER')">
+                                <a class="btn btn-success btn-sm ml-3" href="/library-cart" sec:authorize="hasRole('USER')">
                                     <i class="fa fa-shopping-cart"></i> Cart
                                 </a>
                             </li>
