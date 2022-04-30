@@ -19,7 +19,7 @@
         <div class="form-row align-items-center">
             <div class="col">
                 <input type="text" name="keyword" class="form-control mb-10" id="inlineFormInput"
-                       placeholder="Book Name/Serial Name/Author/ISBN" required>
+                       placeholder="Book Name/Author/ISBN" required>
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-success">Search</button>
@@ -31,13 +31,11 @@
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
             <tr>
-
+                <th sec:authorize="isAuthenticated()">ISBN</th>
                 <th>Book Name</th>
-                <th>Serial Name</th>
                 <th>Books Author</th>
                 <th>Books Publisher</th>
                 <th>Books description</th>
-                <th sec:authorize="isAuthenticated()">ISBN</th>
                 <th>Books language</th>
                 <th>Books page</th>
                 <th>Books price</th>
@@ -47,16 +45,14 @@
 
             <tbody>
             <tr th:each="tempBook : ${books}">
-
+                <td th:text="${tempBook.isbn}" sec:authorize="isAuthenticated()"></td>
                 <td th:text="${tempBook.bookName}"></td>
-                <td th:text="${tempBook.serialName}"></td>
                 <td th:text="${tempBook.booksAuthor}"></td>
                 <td th:text="${tempBook.booksPublisher}"></td>
                 <td th:text="${tempBook.description}"></td>
-                <td th:text="${tempBook.isbn}" sec:authorize="isAuthenticated()"></td>
                 <td th:text="${tempBook.language}"></td>
                 <td th:text="${tempBook.page}"></td>
-                <td th:text="${tempBook.price}"></td>
+                <td th:text="${tempBook.price} + '$'"></td>
                 <td >
                     <th:block sec:authorize="hasRole('ADMIN')" >
                         <div>

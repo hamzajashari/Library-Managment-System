@@ -5,9 +5,9 @@
     <h5 class="text-center text-danger" th:text="${error}"></h5>
   </div>
   <div class="container">
-    <h3>LIBRARY CART FOR</h3>
+    <h3>Library Cart for <th:block th:text="${librarycart.getUser().getName()}"></th:block></h3>
     <hr>
-    <h5 th:text="${librarycart.getUser().getName()} + ' created: ' + ${datecreated}"> </h5>
+    <h5 th:text="'Created on: ' + ${datecreated}"> </h5>
     <hr>
     <div class="col-12" th:if="${books.size() > 0}">
 
@@ -17,6 +17,9 @@
           <th>Book Name</th>
           <th>Author</th>
           <th>Publisher</th>
+          <th>Language</th>
+          <th>Pages</th>
+          <th>Price</th>
           <th sec:authorize="hasRole('ADMIN')">Action</th>
         </tr>
         </thead>
@@ -25,6 +28,9 @@
           <td th:text="${book.bookName}"></td>
           <td th:text="${book.booksAuthor}"></td>
           <td th:text="${book.booksPublisher}"></td>
+          <td th:text="${book.language}"></td>
+          <td th:text="${book.page}"></td>
+          <td th:text="${book.price} + '$'"></td>
         </tr>
         </tbody>
       </table>
