@@ -44,10 +44,6 @@ public class Book {
     @JoinColumn(name = "publisher_id")
     private List<Publisher> publisher;
 
-    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "review_id")
-    private List<Review> review;
-
     public String getBookimg() {
         return foto;
     }
