@@ -1,6 +1,7 @@
 package com.mnb.controller;
 
 
+import com.mnb.dtos.StripeChargeRequestDTO;
 import com.mnb.entity.Book;
 import com.mnb.entity.LibraryCart;
 import com.mnb.entity.User;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/library-cart")
 public class LibraryCartController {
 
+    private static final String STRIPE_PUBLISHABLE_KEY = "pk_test_51KuGsBGsmQFgruPXC2WDKq7q90Tpn3Nv1dqgAwPJhfkIjbS5x8fjxZUP79jCon3NElA1653vmCW2Np6MNQw7Ib5v008R886Pso";
     private final LibraryCartService libraryCartService;
 
     public LibraryCartController(LibraryCartService libraryCartService) {
@@ -35,10 +37,16 @@ public class LibraryCartController {
         String username = req.getRemoteUser();
         LibraryCart libraryCart = this.libraryCartService.getActiveLibraryCart(username);
         List<Book> bookList = this.libraryCartService.listAllBooksInLibraryCart(libraryCart.getId());
+
+        model.addAttribute("bodyContent", "library-cart");
         model.addAttribute("librarycart", libraryCart);
         model.addAttribute("books", bookList);
-        model.addAttribute("bodyContent", "library-cart");
         model.addAttribute("datecreated",libraryCart.getDateCreated().toLocalDate());
+
+        //added for stripe
+        model.addAttribute("amount", this.libraryCartService.charge(libraryCart.getId())*100); // amount in cents
+        model.addAttribute("stripePublicKey", STRIPE_PUBLISHABLE_KEY);
+        model.addAttribute("currency", StripeChargeRequestDTO.Currency.EUR);
         return "master-template";
     }
     @PostMapping("/add-book/{id}")

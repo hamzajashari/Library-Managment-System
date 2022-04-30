@@ -1,21 +1,22 @@
 <section  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-  <form th:action="@{/charge}" method='POST' id='checkout-form' xmlns:th="http://www.springframework.org/schema/mvc">
-    <input type='hidden' th:value='${amount}' name='amount' />
-    <div>
-      <label><b>Price:</b> <span th:text='${amount/100}' /></label>
-    </div>
-
-    <script
-            src='https://checkout.stripe.com/checkout.js'
-            class='stripe-button'
-            th:attr='data-key=${stripePublicKey},
+  <div class="container">
+    <form th:action="@{/charge}" method='POST' id='checkout-form' xmlns:th="http://www.springframework.org/schema/mvc">
+      <input type='hidden' th:value='${amount}' name='amount' />
+      <div>
+        <label><b>Price:</b> <span th:text='${amount}' /></label>
+      </div>
+      <script
+              src='https://checkout.stripe.com/checkout.js'
+              class='stripe-button'
+              th:attr='data-key=${stripePublicKey},
             data-amount=${amount},
             data-currency=${currency}'
-            data-name='Checkout'
-            data-description='Checkout example from library'
-            data-image='/kirby.png'
-            data-locale='auto'
-            data-zip-code='false'>
-    </script>
-  </form>
+              data-name='Checkout'
+              data-description='Checkout example from library'
+              data-image='../static/images/pay.png'
+              data-locale='auto'
+              data-zip-code='false'>
+      </script>
+    </form>
+  </div>
 </section>

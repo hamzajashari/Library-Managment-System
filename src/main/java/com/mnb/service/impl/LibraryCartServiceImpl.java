@@ -6,7 +6,6 @@ import com.mnb.entity.LibraryCart;
 import com.mnb.entity.User;
 import com.mnb.entity.enumerations.LibraryCartStatus;
 import com.mnb.entity.exception.*;
-import com.mnb.repository.BookRepository;
 import com.mnb.repository.LibraryCartRepository;
 import com.mnb.repository.UserRepository;
 import com.mnb.service.BookService;
@@ -15,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,6 +83,11 @@ public class LibraryCartServiceImpl implements LibraryCartService {
         this.libraryCartRepository.save(libraryCart);
 
         return libraryCart;
+    }
+
+    @Override
+    public int charge(Long id) {
+        return this.libraryCartRepository.findById(id).get().getBookList().stream().mapToInt(book -> (int) book.getPrice()).reduce(0,(sum, price)->sum+price) ;
     }
 
 

@@ -36,29 +36,25 @@
         </tr>
         </tbody>
       </table>
-
-          <a th:href="@{/checkout}">Pay</a>
-<!--        <form th:action="@{/charge}" method='POST' id='checkout-form'>-->
-<!--          <input type='hidden' th:value='${amount}' name='amount' />-->
-<!--          <div>-->
-<!--            <label><b>:</b> <span th:text='${amount/100}' /></label>-->
-<!--          </div>-->
-
-<!--          <scriptPrice-->
-<!--                  src='https://checkout.stripe.com/checkout.js'-->
-<!--                  class='stripe-button'-->
-<!--                  th:attr='data-key=${stripePublicKey},-->
-<!--            data-amount=${amount},-->
-<!--            data-currency=${currency}'-->
-<!--                  data-name='Checkout'-->
-<!--                  data-description='Checkout example from library'-->
-<!--                  data-locale='auto'-->
-<!--                  data-zip-code='false'>-->
-<!--          </scriptPrice>-->
-<!--        </form>-->
-
-
     </div>
-
   </div>
+  <form th:action="@{/charge}" method='POST'>
+    <input type='hidden' th:value='${amount}' name='amount' />
+    <div>
+      <label><b>Price:</b> <span th:text="${amount/100}" /></label>
+    </div>
+    <script
+            src='https://checkout.stripe.com/checkout.js'
+            class='stripe-button'
+            th:attr='data-key=${stripePublicKey},
+            data-amount=${amount},
+            data-currency=${currency}'
+            data-name='Checkout'
+            data-description='Checkout example from library'
+            data-image='../static/images/pay.png'
+            data-locale='auto'
+            data-zip-code='false'>
+    </script>
+  </form>
 </section>
+

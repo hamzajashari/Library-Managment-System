@@ -53,7 +53,8 @@ public class BookController {
         //get the book from the service
         Book theBook = bookService.findById(id);
         model.addAttribute("bodyContent","book-form");
-        //set book as a model attribute to pre-populate the form
+        model.addAttribute("authors",authorService.findAll());
+        model.addAttribute("publishers",publisherService.findAll());
         model.addAttribute("books", theBook);
         return "master-template";
     }
@@ -61,7 +62,6 @@ public class BookController {
     public String saveBook(@ModelAttribute("books") Book theBook) {
         // save the book
         bookService.save(theBook);
-        // use a redirect to prevent duplicate submissions
         return "redirect:/books";
     }
 
