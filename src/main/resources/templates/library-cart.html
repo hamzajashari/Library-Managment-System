@@ -36,6 +36,14 @@
         </tr>
         </tbody>
       </table>
+      <form th:action="@{'/library-cart/payment/{id}' (id=${librarycart.getId()})}"
+            th:method="POST"
+            sec:authorize="hasRole('USER')">
+        <button type="submit"
+                class="btn btn-info btn-sm mb-1">
+          Pay
+        </button>
+      </form>
     </div>
 
   </div>

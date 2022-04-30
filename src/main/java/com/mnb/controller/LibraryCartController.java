@@ -51,4 +51,13 @@ public class LibraryCartController {
             return "redirect:/library-cart?error=" + exception.getMessage();
         }
     }
+    @PostMapping("/payment/{id}")
+    public String Payment(@PathVariable Long id) {
+        try {
+            this.libraryCartService.pay(id);
+            return "redirect:/library-cart";
+        } catch (RuntimeException exception) {
+            return "redirect:/library-cart?error=" + exception.getMessage();
+        }
+    }
 }

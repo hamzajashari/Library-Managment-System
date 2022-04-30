@@ -5,10 +5,7 @@ import com.mnb.entity.Book;
 import com.mnb.entity.LibraryCart;
 import com.mnb.entity.User;
 import com.mnb.entity.enumerations.LibraryCartStatus;
-import com.mnb.entity.exception.BookAlreadyInLibraryCartException;
-import com.mnb.entity.exception.BookNotFoundException;
-import com.mnb.entity.exception.LibraryCartNotFoundException;
-import com.mnb.entity.exception.UserNotFoundException;
+import com.mnb.entity.exception.*;
 import com.mnb.repository.BookRepository;
 import com.mnb.repository.LibraryCartRepository;
 import com.mnb.repository.UserRepository;
@@ -72,4 +69,21 @@ public class LibraryCartServiceImpl implements LibraryCartService {
         return this.libraryCartRepository.save(libraryCart);
 
     }
+
+    @Override
+    public LibraryCart findById(Long id) {
+        return this.libraryCartRepository.findById(id).orElseThrow(() -> new InvalidLibraryCartException());
+    }
+
+    @Override
+    public LibraryCart pay(Long id) {
+
+        LibraryCart libraryCart= this.libraryCartRepository.findById(id).orElseThrow(() -> new InvalidLibraryCartException());
+        libraryCart.getBookList().clear();
+        this.libraryCartRepository.save(libraryCart);
+
+        return libraryCart;
+    }
+
+
 }

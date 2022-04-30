@@ -9,5 +9,7 @@ public interface LibraryCartService {
     List<Book> listAllBooksInLibraryCart(Long cartId);
     LibraryCart getActiveLibraryCart(String username);
     LibraryCart addBookToLibraryCart(String username, Long bookId);
+    LibraryCart findById(Long id);
+    LibraryCart pay(Long id);
 
 }
