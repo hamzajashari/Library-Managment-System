@@ -28,21 +28,24 @@ public class UserprofileController {
     }
 
     @GetMapping()
-    public String userprofile(Model model) {
+    public String userprofile(Model model,HttpServletRequest request) {
+        String oldusername = request.getRemoteUser();
+
+        model.addAttribute("username",oldusername);
+        model.addAttribute("fullname",this.userService.fullname(oldusername));
         model.addAttribute("bodyContent","user-profile");
         return "master-template";
     }
     @PostMapping()
     public String update(HttpServletRequest request,
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "username") String username,
             @RequestParam(value = "password") String password,
             @RequestParam(value = "updatePassword") String UpdatePassword,
             @RequestParam(value = "dateOfBirth") String dateOfBirth, Model model) {
         try {
             String oldusername = request.getRemoteUser();
-            this.authService.update(name,oldusername,username,password,UpdatePassword,dateOfBirth);
-            model.addAttribute("username",username);
+            this.authService.update(name,oldusername,password,UpdatePassword,dateOfBirth);
+            model.addAttribute("username",oldusername);
             return "redirect:/user-profile";
         } catch (InvalidArgumentsException | PasswordsDoNotMatchException exception) {
             return "redirect:/user-profile?error=" + exception.getMessage();

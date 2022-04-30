@@ -49,7 +49,6 @@ public class PublisherController {
     public String showFormForUpdate(@PathVariable Long id, Model model) {
         //get the publisher from the service
         Publisher thePublisher = publisherService.findById(id);
-        //set publisher as a model attribute to pre-populate the form
         model.addAttribute("publishers", thePublisher);
         model.addAttribute("bodyContent","publisher-form");
         return "master-template";

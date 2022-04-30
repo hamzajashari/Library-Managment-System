@@ -44,7 +44,7 @@ public class LibraryCartController {
         model.addAttribute("datecreated",libraryCart.getDateCreated().toLocalDate());
 
         //added for stripe
-        model.addAttribute("amount", this.libraryCartService.charge(libraryCart.getId())*100); // amount in cents
+        model.addAttribute("amount", this.libraryCartService.charge(libraryCart.getId())*100);
         model.addAttribute("stripePublicKey", STRIPE_PUBLISHABLE_KEY);
         model.addAttribute("currency", StripeChargeRequestDTO.Currency.EUR);
         return "master-template";

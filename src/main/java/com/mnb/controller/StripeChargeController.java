@@ -2,24 +2,24 @@ package com.mnb.controller;
 
 
 import com.mnb.dtos.StripeChargeRequestDTO;
+import com.mnb.service.LibraryCartService;
 import com.mnb.service.impl.StripeService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/charge")
 public class StripeChargeController {
 
     private final StripeService paymentsService;
+    private final LibraryCartService libraryCartService;
 
-    public StripeChargeController(StripeService paymentsService) {
+    public StripeChargeController(StripeService paymentsService,LibraryCartService libraryCartService) {
         this.paymentsService = paymentsService;
+        this.libraryCartService=libraryCartService;
     }
 
     @GetMapping
@@ -27,8 +27,8 @@ public class StripeChargeController {
         model.addAttribute("bodyContent","result");
         return "master-template";
     }
-    @PostMapping
-    public String charge(StripeChargeRequestDTO chargeRequest, Model model) throws StripeException {
+    @PostMapping("/{id}")
+    public String charge(@PathVariable Long id, StripeChargeRequestDTO chargeRequest, Model model) throws StripeException {
         model.addAttribute("bodyContent","result");
         chargeRequest.setDescription("Example charge");
         chargeRequest.setCurrency(StripeChargeRequestDTO.Currency.EUR);
@@ -37,6 +37,7 @@ public class StripeChargeController {
         model.addAttribute("status", charge.getStatus());
         model.addAttribute("chargeId", charge.getId());
         model.addAttribute("balance_transaction", charge.getBalanceTransaction());
+        this.libraryCartService.pay(id);
         return "master-template";
     }
 

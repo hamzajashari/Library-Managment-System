@@ -38,7 +38,8 @@
       </table>
     </div>
   </div>
-  <form th:action="@{/charge}" method='POST'>
+<!--  "@{'/books/edit/{id}' (id=${tempBook.getId()})}"-->
+  <form th:action="@{'/charge/{id}' (id=${librarycart.getId()})}" method='POST'>
     <input type='hidden' th:value='${amount}' name='amount' />
     <div>
       <label><b>Price:</b> <span th:text="${amount/100}" /></label>

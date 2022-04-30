@@ -24,9 +24,9 @@ public class AuthServiceImpl implements AuthService {
         this.passwordEncoder = passwordEncoder;
     }
     @Override
-    public void update(String name,String oldUsername, String username, String password,String updatePassword,String dateOfBirth) throws InvalidUpdateException {
+    public void update(String name,String oldUsername, String password,String updatePassword,String dateOfBirth) throws InvalidUpdateException {
         User user=null;
-        if (username==null || username.isEmpty() || password==null || password.isEmpty() ||
+        if (password==null || password.isEmpty() ||
                 name==null || name.isEmpty() || dateOfBirth==null || dateOfBirth.equals("")) {
             throw new InvalidArgumentsException();
         }
@@ -34,7 +34,6 @@ public class AuthServiceImpl implements AuthService {
            //user= this.userRepository.findByUsernameAndPassword(oldUsername,password).orElseThrow(()-> new UsernameNotFoundException(username));
             user = this.userRepository.findByUsername(oldUsername).orElseThrow(()-> new UsernameNotFoundException(oldUsername));
             user.setName(name);
-            user.setUsername(username);
             user.setPassword(passwordEncoder.encode(updatePassword));
             user.setDateOfBirth(LocalDate.parse(dateOfBirth));
             //user.setId(this.userRepository.findByUsername(o).get().getId());
